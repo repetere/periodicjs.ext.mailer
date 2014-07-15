@@ -1,7 +1,7 @@
 {
   "name": "periodicjs.ext.mailer",
   "description": "mailer extension for periodicjs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "index.js",
   "engines": {
     "node": ">=0.10.x"
@@ -17,9 +17,8 @@
   },
   "scripts": {},
   "dependencies": {
-    "util-extend": "^1.0.1",
-    "nodemailer": "~0.7.0",
-    "ejs": "~1.0.0"
+    "nodemailer": "0.7.1",
+    "ejs": "1.0.0"
   },
   "devDependencies": {},
   "keywords": [
@@ -27,8 +26,12 @@
   ],
   "readme": "periodicjs.ext.sample\n=====================\n\nanother sample extension\n",
   "readmeFilename": "README.md",
-  "_id": "periodicjs.ext.sample@0.0.1",
+  "_id": "periodicjs.ext.mailer@0.0.1",
   "_shasum": "9c5c8e05ba4372702966f84e590ef53dc88c9aee",
-  "_from": "https://github.com/typesettin/periodicjs.ext.sample/archive/master.tar.gz",
-  "_resolved": "https://github.com/typesettin/periodicjs.ext.sample/archive/master.tar.gz"
+  "_from": "https://github.com/typesettin/periodicjs.ext.mailer/archive/master.tar.gz",
+  "_resolved": "https://github.com/typesettin/periodicjs.ext.mailer/archive/master.tar.gz",
+  "bugs": {
+    "url": "https://github.com/typesettin/periodicjs.ext.mailer/issues"
+  },
+  "homepage": "https://github.com/typesettin/periodicjs.ext.mailer"
 }
