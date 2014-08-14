@@ -3,17 +3,19 @@
 var path = require('path'),
 		fs = require('fs-extra'),
 		nodemailer = require('nodemailer'),
-		appController = require(path.join(process.cwd(),'app/controller/application')),
-		applicationController,
+		Utilities = require('periodicjs.core.utilities'),
+	  ControllerHelper = require('periodicjs.core.controllerhelper'),
+	  CoreUtilities,
+	  CoreController,
 		appSettings,
 		mongoose,
 		logger;
 
 //http://www.json2html.com/
 var getTransport = function(callback){
-	var transportJsonFile = path.resolve( __dirname,"../transport.json"),
+	var transportJsonFile = path.resolve( __dirname,'../transport.json'),
 			transportObject = {
-				transportType : "direct",
+				transportType : 'direct',
 				transportOptions : {debug:true}
 			};
 
@@ -30,45 +32,40 @@ var getTransport = function(callback){
 					callback(null,nodemailer.createTransport(transportObject.type,transportObject.transportoptions));
 			}
 			else{
-				callback(new Error("Invalid transport configuration, no transport for env: "+appenvironment),null);
+				callback(new Error('Invalid transport configuration, no transport for env: '+appenvironment),null);
 			}
-			// 	
-
-			// callback(null);
-			// 	// return nodemailer.createTransport(transportType,transportOptions);
-
 		}
 	});
 };
 
-var sendmail = function(req, res, next){
-	var nodemailtransport = getTransport(function(err,transport){
+var sendmail = function(req, res){
+	getTransport(function(err,transport){
 		if(err){
-			applicationController.handleDocumentQueryErrorResponse({
+			CoreController.handleDocumentQueryErrorResponse({
 				err:err,
 				res:res,
 				req:req
 			});
 		}
 		else{
-			var emailMessage = applicationController.removeEmptyObjectValues(req.body);
+			var emailMessage = CoreUtilities.removeEmptyObjectValues(req.body);
 			emailMessage.generateTextFromHTML = true;
 
 			transport.sendMail(emailMessage,function(err,response){
 				if(err){
-					applicationController.handleDocumentQueryErrorResponse({
+					CoreController.handleDocumentQueryErrorResponse({
 						err:err,
 						res:res,
 						req:req
 					});
 				}
 				else{
-					applicationController.handleDocumentQueryRender({
+					CoreController.handleDocumentQueryRender({
 						res:res,
 						req:req,
 						responseData:{
 							pagedata: {
-								title:"Email Sent"
+								title:'Email Sent'
 							},
 							emailresponse:response,
 							user:req.user
@@ -84,7 +81,8 @@ var controller = function(resources){
 	logger = resources.logger;
 	mongoose = resources.mongoose;
 	appSettings = resources.settings;
-	applicationController = new appController(resources);
+  CoreController = new ControllerHelper(resources);
+  CoreUtilities = new Utilities(resources);
 
 	return{
 		sendmail:sendmail
