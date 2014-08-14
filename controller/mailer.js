@@ -5,6 +5,8 @@ var path = require('path'),
 		nodemailer = require('nodemailer'),
 		Utilities = require('periodicjs.core.utilities'),
 	  ControllerHelper = require('periodicjs.core.controllerhelper'),
+	  Extensions = require('periodicjs.core.extensions'),
+		CoreExtension,
 	  CoreUtilities,
 	  CoreController,
 		appSettings,
@@ -13,7 +15,7 @@ var path = require('path'),
 
 //http://www.json2html.com/
 var getTransport = function(callback){
-	var transportJsonFile = path.resolve( __dirname,'../transport.json'),
+	var transportJsonFile = path.resolve( CoreExtension.extFunctions.getconfigdir({extname:'periodicjs.ext.mailer'}),'./transport.json'),
 			transportObject = {
 				transportType : 'direct',
 				transportOptions : {debug:true}
@@ -83,6 +85,7 @@ var controller = function(resources){
 	appSettings = resources.settings;
   CoreController = new ControllerHelper(resources);
   CoreUtilities = new Utilities(resources);
+	CoreExtension = new Extensions(appSettings);
 
 	return{
 		sendmail:sendmail
