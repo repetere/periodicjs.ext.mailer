@@ -6,6 +6,7 @@ var path = require('path'),
 		Utilities = require('periodicjs.core.utilities'),
 	  ControllerHelper = require('periodicjs.core.controllerhelper'),
 	  Extensions = require('periodicjs.core.extensions'),
+	  CoreMailer = require('periodicjs.core.mailer'),
 		CoreExtension,
 	  CoreUtilities,
 	  CoreController,
@@ -13,35 +14,8 @@ var path = require('path'),
 		mongoose,
 		logger;
 
-//http://www.json2html.com/
-var getTransport = function(callback){
-	var transportJsonFile = path.resolve( CoreExtension.extFunctions.getconfigdir({extname:'periodicjs.ext.mailer'}),'./transport.json'),
-			transportObject = {
-				transportType : 'direct',
-				transportOptions : {debug:true}
-			};
-
-	fs.readJson(transportJsonFile, function(err, transportJSON) {
-		if(err){
-			logger.error(err);
-			callback(err,null);
-		}
-		else{
-			var appenvironment = appSettings.application.environment;
-
-			if(transportJSON[appenvironment]){
-				transportObject = transportJSON[appenvironment];
-					callback(null,nodemailer.createTransport(transportObject.type,transportObject.transportoptions));
-			}
-			else{
-				callback(new Error('Invalid transport configuration, no transport for env: '+appenvironment),null);
-			}
-		}
-	});
-};
-
 var sendmail = function(req, res){
-	getTransport(function(err,transport){
+	CoreMailer.getTransport({appenvironment : appSettings.application.environment},function(err,transport){
 		if(err){
 			CoreController.handleDocumentQueryErrorResponse({
 				err:err,
