@@ -1,7 +1,7 @@
 {
   "name": "periodicjs.ext.mailer",
   "description": "mailer extension for periodicjs",
-  "version": "1.5.0",
+  "version": "1.5.10",
   "main": "index.js",
   "engines": {
     "node": ">=0.10.x"
@@ -25,7 +25,8 @@
     "ejs": "1.0.0",
     "periodicjs.core.controllerhelper": "~1.1.1",
     "periodicjs.core.extensions": "~1.5.0",
-    "periodicjs.core.utilities": "~1.1.1"
+    "periodicjs.core.utilities": "~1.1.1",
+    "periodicjs.core.mailer": "~1.2.0"
   },
   "devDependencies": {},
   "keywords": [
