@@ -1,6 +1,6 @@
 {
 	"name": "periodicjs.ext.mailer",
-	"periodicCompatibility":"1.0.0",
+	"periodicCompatibility":"1.2.0",
 	"periodicDependencies": [],
 	"periodicjs.ext.admin": {
 		"menu": {
