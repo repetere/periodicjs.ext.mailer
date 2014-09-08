@@ -23,7 +23,7 @@ var path = require('path'),
 
 
 ExtensionCore.install({
-		enabled:true,
+		enabled:false,
 		extname:extname,
 		extdir:extdir,
 		skipconffile:skipconffile,
