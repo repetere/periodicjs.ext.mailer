@@ -1,5 +1,4 @@
 {
-	"name": "periodicjs.ext.mailer",
 	"periodicCompatibility":"1.2.0",
 	"periodicDependencies": [],
 	"periodicjs.ext.admin": {
