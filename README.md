@@ -68,7 +68,7 @@ $ grunt watch
 For generating documentation
 ```
 $ grunt doc
-$ jsdoc2md lib/**/*.js > doc/api.md
+$ jsdoc2md controller/**/*.js index.js install.js uninstall.js > doc/api.md
 ```
 ##Notes
 * Check out https://github.com/typesettin/periodicjs for the full Periodic Documentation
