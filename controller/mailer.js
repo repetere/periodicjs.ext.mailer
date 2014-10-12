@@ -1,7 +1,7 @@
 'use strict';
 
 var Utilities = require('periodicjs.core.utilities'),
-	  ControllerHelper = require('periodicjs.core.controllerhelper'),
+	  ControllerHelper = require('periodicjs.core.controller'),
 	  Extensions = require('periodicjs.core.extensions'),
 	  CoreMailer = require('periodicjs.core.mailer'),
 		CoreExtension,
