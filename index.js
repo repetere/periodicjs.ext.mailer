@@ -12,10 +12,15 @@
  */
 module.exports = function(periodic){
 	// express,app,logger,config,db,mongoose
+	periodic.app.controller.extension.mailer = {
+		mailer: require('./controller/mailer')(periodic)
+	};
+
 	var mailRouter = periodic.express.Router(),
-			mailController = require('./controller/mailer')(periodic);
+			mailController = periodic.app.controller.extension.mailer.mailer;
 
 	mailRouter.post('/testmail', mailController.sendmail);
 
 	periodic.app.use('/p-admin/mailer',mailRouter);
+	return periodic;
 };
