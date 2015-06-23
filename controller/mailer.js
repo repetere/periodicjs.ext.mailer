@@ -1,9 +1,6 @@
 'use strict';
 
-var Utilities = require('periodicjs.core.utilities'),
-	  ControllerHelper = require('periodicjs.core.controller'),
-	  Extensions = require('periodicjs.core.extensions'),
-	  CoreMailer = require('periodicjs.core.mailer'),
+var CoreMailer,
 		CoreExtension,
 	  CoreUtilities,
 	  CoreController,
@@ -72,9 +69,10 @@ var controller = function(resources){
 	logger = resources.logger;
 	mongoose = resources.mongoose;
 	appSettings = resources.settings;
-  CoreController = new ControllerHelper(resources);
-  CoreUtilities = new Utilities(resources);
-	CoreExtension = new Extensions(appSettings);
+  CoreController = resources.core.controller;
+  CoreUtilities = resources.core.utilities;
+	CoreExtension = resources.core.extension;
+	CoreMailer = resources.core.mailer;
 
 	return{
 		sendmail:sendmail
