@@ -1,12 +1,55 @@
 'use strict';
 
-var CoreMailer,
-		CoreExtension,
-	  CoreUtilities,
-	  CoreController,
-		appSettings,
-		mongoose,
-		logger;
+var	fs = require('fs-extra'),
+	path = require('path'),
+	CoreMailer,
+	CoreExtension,
+	CoreUtilities,
+	CoreController,
+	appSettings,
+	appenvironment,
+	mongoose,
+	mailerSettingsFile = path.join(process.cwd(), 'content/config/extensions/periodicjs.ext.mailer/transport.json'),
+	mailerSettingJSON = fs.readJsonSync(mailerSettingsFile),
+	logger;
+
+var testemail = function(req,res){
+	var mailerSettings = mailerSettingJSON[appenvironment],
+		mail_settings = {
+				periodic_config:{
+					
+				},
+				'periodicjs.ext.mailer':{
+					'transport.json':{
+					}
+				}
+			};
+	mail_settings.periodic_config[appenvironment] = {
+		'adminnotificationemail': 'Promise Financial [Do Not Reply] <no-reply@promisefin.com>',
+		'serverfromemail': 'Promise Financial [Do Not Reply] <no-reply@promisefin.com>',
+		'adminnotificationemail_bcc': 'tech@promisefin.com',
+		'adminbccemail': 'comm-test@promisefin.com, emailtosalesforce@1-1urwz24exhogxgjsp1xsxvd1pnldoll15ibwgqkvsnze8t963q.g-3nciweag.cs17.le.sandbox.salesforce.com',
+	};
+	mail_settings['periodicjs.ext.mailer']['transport.json'][appenvironment] = mailerSettings;
+
+	var	viewtemplate = {
+			viewname: 'p-admin/mailer/test',
+			themefileext: appSettings.templatefileextension,
+			extname: 'periodicjs.ext.mailer'
+		},
+		viewdata = {
+			appenvironment: appenvironment,
+			pagedata: {
+				title: 'Test Email Settings',
+				toplink: '&raquo; Test email settings',
+				pageID: 'application',
+				extensions: CoreUtilities.getAdminMenu()
+			},
+			user: req.user,
+			mail_settings: mail_settings
+		};
+	CoreController.renderView(req, res, viewtemplate, viewdata);
+};
 
 /**
  * send a test email from a form submission
@@ -27,7 +70,7 @@ var sendmail = function(req, res){
 			var emailMessage = CoreUtilities.removeEmptyObjectValues(req.body);
 			emailMessage.generateTextFromHTML = true;
 
-			transport.sendMail(emailMessage,function(err,response){
+			transport.sendMail(emailMessage,function(err,email_response){
 				if(err){
 					CoreController.handleDocumentQueryErrorResponse({
 						err:err,
@@ -40,11 +83,8 @@ var sendmail = function(req, res){
 						res:res,
 						req:req,
 						responseData:{
-							pagedata: {
-								title:'Email Sent'
-							},
-							emailresponse:response,
-							user:req.user
+							result: 'success',
+							data:email_response
 						}
 					});
 				}
@@ -73,8 +113,10 @@ var controller = function(resources){
   CoreUtilities = resources.core.utilities;
 	CoreExtension = resources.core.extension;
 	CoreMailer = resources.core.mailer;
+	appenvironment = appSettings.application.environment;
 
 	return{
+		testemail:testemail,
 		sendmail:sendmail
 	};
 };

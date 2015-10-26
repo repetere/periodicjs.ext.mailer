@@ -1,7 +1,7 @@
 {
   "name": "periodicjs.ext.mailer",
   "description": "mailer extension for periodicjs",
-  "version": "5.9.0",
+  "version": "5.9.2",
   "main": "index.js",
   "engines": {
     "node": ">=0.10.x"
@@ -58,9 +58,9 @@
     "url": "https://github.com/typesettin/periodicjs.ext.mailer/issues"
   },
   "homepage": "https://github.com/typesettin/periodicjs.ext.mailer",
-  "_id": "periodicjs.ext.mailer@4.0.0",
-  "_shasum": "4d36a873709a61b371ba22b871b3075a4dcee323",
-  "_from": "periodicjs.ext.mailer@>=4.0.0 <5.0.0",
+  "_id": "periodicjs.ext.mailer@5.9.0",
+  "_shasum": "0cf529c458b94f9e9c098cbe13799b23682bc981",
+  "_from": "periodicjs.ext.mailer@5.9.0",
   "_npmVersion": "2.0.0-beta.0",
   "_npmUser": {
     "name": "yawetse",

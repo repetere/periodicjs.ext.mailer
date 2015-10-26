@@ -16,11 +16,8 @@ module.exports = function(periodic){
 		mailer: require('./controller/mailer')(periodic)
 	};
 
-	var mailRouter = periodic.express.Router(),
-			mailController = periodic.app.controller.extension.mailer.mailer;
+	var mailRouter = periodic.express.Router();
 
-	mailRouter.post('/testmail', mailController.sendmail);
-
-	periodic.app.use('/p-admin/mailer',mailRouter);
+	periodic.app.use('/' + periodic.app.locals.adminPath + '/mailer',mailRouter);
 	return periodic;
 };

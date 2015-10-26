@@ -1,10 +1,20 @@
 {
 	"periodicCompatibility":"5.0.0",
 	"periodicDependencies": [],
-	"periodicjs.ext.admin": {
+	"periodicjs.ext.asyncadmin": {
 		"menu": {
 			"Extensions": {
-				"Mailer": "<a href=\"/p-admin/mailer/\">Test Email Settings</a>"
+				"mailer": {
+					"userprivilege":"110",
+					"tree-item": "file",
+			    "tree-item-label": "Test Emails",
+			    "tree-item-id": "ext.mailer",
+			    "tree-item-link": "/%locals.adminPath%/mailer/test",
+			    "tree-item-attributes": {
+			      "class": "async-admin-ajax-link",
+			      "title": "Test email settings"
+			    }
+				}
 			}
 		}
 	}
