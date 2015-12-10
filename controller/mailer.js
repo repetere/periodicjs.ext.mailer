@@ -25,10 +25,10 @@ var testemail = function(req,res){
 				}
 			};
 	mail_settings.periodic_config[appenvironment] = {
-		'adminnotificationemail': 'Promise Financial [Do Not Reply] <no-reply@promisefin.com>',
-		'serverfromemail': 'Promise Financial [Do Not Reply] <no-reply@promisefin.com>',
-		'adminnotificationemail_bcc': 'tech@promisefin.com',
-		'adminbccemail': 'comm-test@promisefin.com, emailtosalesforce@1-1urwz24exhogxgjsp1xsxvd1pnldoll15ibwgqkvsnze8t963q.g-3nciweag.cs17.le.sandbox.salesforce.com',
+		'adminnotificationemail': appSettings.adminnotificationemail,
+		'serverfromemail':appSettings.serverfromemail,
+		'adminnotificationemail_bcc': appSettings.adminnotificationemail_bcc,
+		'adminbccemail': appSettings.adminbccemail,
 	};
 	mail_settings['periodicjs.ext.mailer']['transport.json'][appenvironment] = mailerSettings;
 
