@@ -12,7 +12,8 @@
 			    "tree-item-link": "/%locals.adminPath%/mailer/test",
 			    "tree-item-attributes": {
 			      "class": "async-admin-ajax-link",
-			      "title": "Test email settings"
+			      "title": "Test email settings",
+		        "style":"background-image: url(/images/adminui/svg/new96.svg);"
 			    }
 				}
 			}
