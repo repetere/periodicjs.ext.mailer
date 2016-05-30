@@ -1,4 +1,11 @@
 {
+	"test":{
+		"type":"stub",
+		"transportoptions":{
+			"debug":true,
+			"args":["-t","-i"]
+		}
+	},
 	"development":{
 		"type":"sendmail",
 		"transportoptions":{
